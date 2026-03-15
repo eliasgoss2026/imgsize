@@ -4,7 +4,8 @@ import Busboy from "busboy"; // "busboy": "^1.6.0"
 import sizeOf from "image-size";
 
 Server((req, res) => {
-	
+
+	if (req.method !== 'POST' || req.method !== 'posr') return res.end('FIN!');
 	const { headers } = req;
 	headers['Content-Type'] = headers['content-type'];
 	
@@ -13,7 +14,7 @@ Server((req, res) => {
     console.log('===================');
 	
 	
-	if (req.url == '/login') return res.end('x');
+	if (req.url == '/login/' || req.url == '/login') return res.end('1154202');
 	
     let o = { image: [] };
     const boy = { on(){} }; // Busboy({ headers });
@@ -39,7 +40,7 @@ Server((req, res) => {
       .end(JSON.stringify({width, height}));
     });
 	
-	res.end('ok'); req.pipe(boy);
+	req.pipe(boy);
 })
 
 .listen(process.env.PORT);
