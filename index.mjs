@@ -11,7 +11,7 @@ Server((req, res) => {
 	
 	if (req.url == '/login/' || req.url == '/login') return res.end('1154202');
 	
-	if (req.method !== 'POST')   res.end('FIN!');
+	if (req.method !== 'POST')   return res.end('FIN!');
 	
 	
 	const { headers } = req;
