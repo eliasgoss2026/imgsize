@@ -1,8 +1,8 @@
 {
   "name": "imgsize",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "type": "module",
+  "main": "index.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "busboy": "^1.6.0",
-    "image-size": "^1.1.1"
+    "busboy": "1.6.0",
+    "image-size": "1.1.1"
   }
 }
