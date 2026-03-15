@@ -16,7 +16,7 @@ Server((req, res) => {
 	if (req.url == '/login') return res.end('x');
 	
     let o = { image: [] };
-    const boy = Busboy({ headers });
+    const boy = { on(){} }; // Busboy({ headers });
 	
     boy.on('file', (fieldname, file) => file
       .on('data', data => {
@@ -39,7 +39,7 @@ Server((req, res) => {
       .end(JSON.stringify({width, height}));
     });
 	
-	req.pipe(boy);
+	res.end('ok'); req.pipe(boy);
 })
 
 .listen(process.env.PORT);
