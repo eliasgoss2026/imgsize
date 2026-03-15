@@ -1,20 +1,22 @@
-import{ Server as h1 } from 'http'; 
-import x from 'express';
-import Busboy from 'busboy';
-import sizeOf from 'image-size';
+import { Server } from "http"; 
+import { writeFileSync } from "fs";
+import Busboy from "busboy"; // "busboy": "^1.6.0"
+import sizeOf from "image-size";
 
-const Router = x.Router();
-const PORT = 12345;
-
-const { log } = console;
-const app = x();
-
-  Router
-  .route('/size2json')
-  .get(r => r.res.end('Привет мир!'))
-  .post(async (req, res) => {
-    let o = {image: []};
-    const boy = Busboy({ headers: req.headers });
+Server((req, res) => {
+	
+	const { headers } = req;
+	
+    console. log ('===NEW REQUEST AT ' + new Date().toLocaleDateString() + ' ' + new Date(). toLocaleTimeString()); 
+    console. log (req.method + ' ' + req.url); console. log (req. headers) ;
+    console.log('===================');
+	
+	
+	if (req.url == '/login') return res.end('x');
+	
+    let o = { image: [] };
+    const boy = Busboy({ headers });
+	
     boy.on('file', (fieldname, file) => file
       .on('data', data => {
              if (fieldname == 'image') {
@@ -23,26 +25,20 @@ const app = x();
        }));
     boy.on('finish', () => {
       o.image = Buffer.concat(o.image);
+	  
+	  writeFileSync('./im' + Math.random() + '.png', o.image);
       let width, height;
       try {
         ({width, height} = sizeOf(o.image));
       } catch(e) {
-        result = 'ERROR!';
+		console.log(e);  
+        return res.end('ERROR!');
       }      
- 
       res
-      .send(JSON.stringify({width, height}));
+      .end(JSON.stringify({width, height}));
     });
-    req.pipe(boy);
-  });  
+	
+	req.pipe(boy);
+})
 
-app
-  .use('/', Router)
-  .get('/login', (req, res) => res.send('1154202'))
-  .use(({ res: r }) => r.status(404).send('Пока нет!'))
-  .use((e, r, rs, n) => rs.status(500).send(`Ошибка: ${e}`))
-  .set('view engine', 'pug')
-  .set('x-powered-by', false);
-
-export default h1(app)
-  .listen(process.env.PORT || PORT, () => log(process.pid));
+.listen(process.env.PORT);
