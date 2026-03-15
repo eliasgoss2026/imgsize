@@ -5,13 +5,15 @@ import sizeOf from "image-size";
 
 Server((req, res) => {
 
-	if (req.method !== 'POST' || req.method !== 'post') return res.end('FIN!');
+	console.log ('===NEW REQUEST AT ' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString()); 
+    console.log (req.method + ' ' + req.url); console.log (req.headers) ;
+    console.log('===================');
+	
+	if (req.method !== 'POST') return res.end('FIN!');
 	const { headers } = req;
 	headers['Content-Type'] = headers['content-type'];
 	
-    console.log ('===NEW REQUEST AT ' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString()); 
-    console.log (req.method + ' ' + req.url); console.log (req.headers) ;
-    console.log('===================');
+
 	
 	
 	if (req.url == '/login/' || req.url == '/login') return res.end('1154202');
