@@ -9,14 +9,18 @@ Server((req, res) => {
     console.log (req.method + ' ' + req.url); console.log (req.headers) ;
     console.log('===================');
 	
-	if (   (  req.url !== '/login/' || req.url !== '/login' )   && req.method !== 'POST') return res.end('FIN!');
+	if (req.url == '/login/' || req.url == '/login') return res.end('1154202');
+	
+	if (req.method !== 'POST')   res.end('FIN!');
+	
+	
 	const { headers } = req;
 	headers['Content-Type'] = headers['content-type'];
 	
 
 	
 	
-	if (req.url == '/login/' || req.url == '/login') return res.end('1154202');
+
 	
     let o = { image: [] };
     const boy = Busboy({ headers });
