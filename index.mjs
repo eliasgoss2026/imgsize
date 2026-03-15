@@ -5,7 +5,7 @@ import sizeOf from "image-size";
 
 Server((req, res) => {
 
-	if (req.method !== 'POST' && req.method !== 'post') return res.end('FIN!');
+	if (req.method !== 'POST' || req.method !== 'post') return res.end('FIN!');
 	const { headers } = req;
 	headers['Content-Type'] = headers['content-type'];
 	
