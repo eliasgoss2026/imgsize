@@ -8,8 +8,8 @@ Server((req, res) => {
 	const { headers } = req;
 	headers['Content-Type'] = headers['content-type'];
 	
-    console. log ('===NEW REQUEST AT ' + new Date().toLocaleDateString() + ' ' + new Date(). toLocaleTimeString()); 
-    console. log (req.method + ' ' + req.url); console. log (req. headers) ;
+    console.log ('===NEW REQUEST AT ' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString()); 
+    console.log (req.method + ' ' + req.url); console.log (req.headers) ;
     console.log('===================');
 	
 	
