@@ -17,7 +17,7 @@ Server((req, res) => {
 	if (req.url == '/login/' || req.url == '/login') return res.end('1154202');
 	
     let o = { image: [] };
-    const boy = { on(){} }; // Busboy({ headers });
+    const boy = Busboy({ headers });
 	
     boy.on('file', (fieldname, file) => file
       .on('data', data => {
